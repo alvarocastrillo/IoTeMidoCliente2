@@ -1,0 +1,137 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title titulosadm">ADMINISTRACIÓN DE REDES</h4>
+                    
+                  </div>
+                    <div class="card-body">
+                        
+                        <div class="toolbar">
+                                <button *ngIf="permisoEncontrado" class="btn btn-success btn-fab btn-round"  [disabled] = "BtnDCRed" (click)="showFormCreacion()"><i class="material-icons md-48" >add</i></button>
+                        </div>
+                        <br>
+                        <div class="material-datatables">
+                          <table id="dataRed" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            </table>
+                        </div>
+                    </div>
+ 
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- 
+ <div class="modal fade  " id="ModalFormRed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+        <div class="card ">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                    <i class="material-icons">create</i>
+                    </div>
+                    <h4 class=" titulosadm"> {{titleEstado}}</h4>
+                </div>
+                <div class="card-body ">
+                    <form [formGroup]="formRed" autocomplete="off">
+                    <mat-form-field class="example-full-width">
+                        <label class="titulosLabel">NOMBRE</label>
+                        <input matInput type="text" class="titulosLabel" formControlName="Nombre" (keyup)= "convertirLetraMayuscula()">
+                    </mat-form-field>
+                    <div *ngIf="nombreRep" class = "alerta alerta-error" style="color: red"> 
+                            <Strong> Error! </Strong> El nombre esta registrado. 
+                    </div>
+
+                    <mat-form-field >
+                        <label class="titulosLabel">TIPO DE COMUNICACIÓN</label> 
+                        <mat-select class="example-full-width  " formControlName="Tipo_com">
+                                <mat-option  class="titulosLabel" *ngFor="let Tipo of listTipoCom" [value]="Tipo.idString">{{Tipo.nombre}}
+                                </mat-option>
+                        </mat-select>
+                        
+                    </mat-form-field>
+
+                    </form>
+                </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button   class="btn btn-danger btn-sm btn-round " (click)="hideWindows()" style="font-size: 13px">
+                            <i class="material-icons md-3">exit_to_app</i> 
+                            <span class="exomedium" style="font-size: 13px;"> Salir</span>
+            </button>
+            <button class="btn  btn-sm btn-round" [disabled]="!formRed.valid" [ngClass] = "!formRed.valid ? 'disabledbtn' : 'enabledbtn'" (click)="onClicGuardar()">
+                    <i class="material-icons">save</i><span class="exomedium" style="font-size: 13px;"> Guardar</span>
+            </button> 
+
+        </div> 
+        </div>
+    </div>
+</div>  -->
+
+
+<div class="card"   *ngIf="showViewRed">
+    <div class="card-header card-header-info card-header-icon">
+        <div class="card-icon">
+        <i class="material-icons">create</i>
+        </div>
+        <h4 class=" titulosadm"> {{titleEstado}}</h4>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">INFORMACIÓN DETALLADA </h4>
+        <br>
+        <form [formGroup]="formRed" autocomplete="off">
+            <div class="row">
+
+
+                <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-2" >
+                    <label class="tituloInf">NOMBRE</label>
+                    <mat-form-field >
+                    <input class="textDetalle" matInput type="text" formControlName="Nombre">
+                    </mat-form-field>
+
+                </div>
+
+                <div *ngIf="nombreRep" class = "alerta alerta-error" style="color: red"> 
+                    <Strong> Error! </Strong> El nombre esta registrado. 
+                </div>
+                <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-2" >
+            <mat-form-field >
+                <label class="titulosLabel">TIPO DE COMUNICACIÓN</label> 
+                <mat-select class="example-full-width  " formControlName="Tipo_com">
+                        <mat-option  class="titulosLabel" *ngFor="let Tipo of listTipoCom" [value]="Tipo.idString">{{Tipo.nombre}}
+                        </mat-option>
+                </mat-select>
+                
+            </mat-form-field>
+            </div>
+
+
+
+               
+            </div>
+        </form>
+        <div class="ml-md-auto">
+            <button   class="btn btn-danger btn-sm btn-round " (click)="hideWindows()" style="font-size: 13px">
+                <i class="material-icons md-3">exit_to_app</i> 
+                <span class="exomedium" style="font-size: 13px;"> Salir</span>
+            </button>
+            <button class="btn  btn-sm btn-round" [disabled]="!formRed.valid"  (click)="onClicGuardar()">
+                    <i class="material-icons">save</i><span class="exomedium" style="font-size: 13px;"> Guardar</span>
+            </button> 
+        </div>
+
+    </div>
+</div>
