@@ -102,21 +102,34 @@
                     <input class="textDetalle" matInput type="text" formControlName="Nombre">
                     </mat-form-field>
 
+                    <div class="alert-danger" *ngIf="Nombre.invalid && (Nombre.dirty || Nombre.touched)">
+                        <div class="container-error-message" *ngIf="Nombre.errors.required">
+                          Nombre is required
+                        </div>
+                        <div class="container-error-message" *ngIf="Nombre.errors.minlength">
+                          Nombre must be at least 5 characters long.
+                        </div>
+                    </div>
                 </div>
-
+<!-- 
                 <div *ngIf="nombreRep" class = "alerta alerta-error" style="color: red"> 
                     <Strong> Error! </Strong> El nombre esta registrado. 
-                </div>
+                </div> -->
                 <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-2" >
-            <mat-form-field >
-                <label class="titulosLabel">TIPO DE COMUNICACIÓN</label> 
-                <mat-select class="example-full-width  " formControlName="Tipo_com">
-                        <mat-option  class="titulosLabel" *ngFor="let Tipo of listTipoCom" [value]="Tipo.idString">{{Tipo.nombre}}
-                        </mat-option>
-                </mat-select>
-                
-            </mat-form-field>
-            </div>
+                    <mat-form-field >
+                        <label class="titulosLabel">TIPO DE COMUNICACIÓN</label> 
+                        <mat-select class="example-full-width  " formControlName="Tipo_com">
+                                <mat-option  class="titulosLabel" *ngFor="let Tipo of listTipoCom" [value]="Tipo.idString">{{Tipo.nombre}}
+                                </mat-option>
+                        </mat-select>
+                        
+                    </mat-form-field>
+                    <div class="alert-danger" *ngIf="Tipo_com.invalid && (Tipo_com.dirty || Tipo_com.touched)">
+                        <div class="container-error-message" *ngIf="Tipo_com.errors.required">
+                          Tipo_com is required
+                        </div>
+                    </div>
+                </div>
 
 
 

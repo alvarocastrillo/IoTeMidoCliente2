@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { tokens } from '../tokens/token';
 import { RedService } from '../services/red.service';
 import { Persona } from '../models/persona.entidad';
@@ -31,10 +31,15 @@ export class RedComponent implements OnInit {
   showViewRed : boolean;
   permisoEncontrado: boolean;
 
+  // formRed = this.fb.group({
+  //   Id: [null],
+  //   Nombre: ['', Validators.required],
+  //   Tipo_com: ['', Validators.required],
+  // });
   formRed = this.fb.group({
     Id: [null],
-    Nombre: ['', Validators.required],
-    Tipo_com: ['', Validators.required],
+    Nombre: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    Tipo_com: new FormControl('', [Validators.required])
   });
 
   constructor(private serviceRed: RedService,
@@ -51,6 +56,9 @@ export class RedComponent implements OnInit {
       this.permisoEncontrado = false;
     }
   }
+
+  get Nombre() { return this.formRed.get('Nombre'); }
+  get Tipo_com() { return this.formRed.get('Tipo_com'); }
 
     goBackRedes() {
       $('#dataRed').DataTable().destroy();
@@ -257,50 +265,50 @@ export class RedComponent implements OnInit {
   }
   
   onClicGuardar(): void {
-
-    if (this.res == null)
-    {
-      
-      let nombre;
-      let count;
-      nombre = this.formRed.value.Nombre;
-      
-      // count = this.listaRed.filter(x => x['nombre'] == nombre).length;
-      // if (count == 0) {
-        this.res = new Red();
-        this.res.Id_empresa = Number(this.token.ObtenerIdEmpresa());
-        this.res.Nombre = this.formRed.value.Nombre;
-        this.res.Tipo_com = this.formRed.value.Tipo_com;
+    if (this.formRed.valid) {
+      if (this.res == null)
+      {
         
-        this.nombreRep = false;
-        let red = new Red();
-         
-        this.serviceRed.setInsertRed(this.res).subscribe(resp => {
-          red = resp;
-          setTimeout(() => {
-            if (red['mensaje']['id']) {
-              $('#iconoEspera').show();
-            //  this.notificacion.showNotification('Red', this.res.Nombre, 'creado');
-            }
-      
+        let nombre;
+        let count;
+        nombre = this.formRed.value.Nombre;
+        
+        // count = this.listaRed.filter(x => x['nombre'] == nombre).length;
+        // if (count == 0) {
+          this.res = new Red();
+          this.res.Id_empresa = Number(this.token.ObtenerIdEmpresa());
+          this.res.Nombre = this.formRed.value.Nombre;
+          this.res.Tipo_com = this.formRed.value.Tipo_com;
+          
+          this.nombreRep = false;
+          let red = new Red();
+          
+          this.serviceRed.setInsertRed(this.res).subscribe(resp => {
+            red = resp;
+            setTimeout(() => {
+              if (red['mensaje']['id']) {
+                $('#iconoEspera').show();
+              //  this.notificacion.showNotification('Red', this.res.Nombre, 'creado');
+              }
+        
+            });
+            this.goBack();
           });
-          this.goBack();
-        });
-        
-      // } else {
-      //   this.nombreRep = true;
-      //   setTimeout(() => {
-      //     this.nombreRep = false;
-      //   }, 1300);
-      // }
+          
+        // } else {
+        //   this.nombreRep = true;
+        //   setTimeout(() => {
+        //     this.nombreRep = false;
+        //   }, 1300);
+        // }
 
-    }
-    else
-    {
-          this.onClicUpdate();
+      }
+      else
+      {
+            this.onClicUpdate();
 
+      }
     }
-    
 
   }
   deleteRed(id: number) {
