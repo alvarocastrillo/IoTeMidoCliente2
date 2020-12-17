@@ -29,7 +29,7 @@
     "bootstrap-select": "^1.13.17",
     "bootstrap-tagsinput": "^0.7.1",
     "datatables": "^1.10.18",
-    "datatables.net": "^1.10.21",
+    "datatables.net": "^1.10.22",
     "datatables.net-bs4": "^1.10.21",
     "datatables.net-dt": "^1.10.21",
     "datatables.net-responsive": "^2.2.5",
